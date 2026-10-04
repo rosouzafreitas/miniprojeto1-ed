@@ -44,6 +44,8 @@ class MediaPlayer:
         self.current_track = None
 
     def add_to_playlist(self, track_id):
+        if self.playlist_name is None:
+            raise ValueError("Crie uma playlist antes utilizando o comando: playlist new <nome>.")
         self.playlist.add(self._get_track(track_id))
 
     def _get_track(self, track_id):

@@ -89,23 +89,8 @@ python -m coverage run -m unittest test_mediap
 python -m coverage report -m
 ```
 
-Os testes verificam a lista e o cursor, a precedência da fila, o limite do histórico, a ordenação por prioridade e a persistência do estado.
+Os testes verificam a lista e o cursor, a precedência da fila, o limite do histórico, a ordenação por prioridade e a persistência do estado, o teste atingiu uma coverage de aproximadamente 88%.
 
 ## Arquivos excluídos
 
 Adicionado exceção para as pastas `pycache` ao arquivo .gitignore
-
-## Roteiro manual completo
-
-1. Na pasta que contém `mediap`, inicie com `python -m mediap.main`.
-2. Rode `help` e `library load mediap/library.json`. Confira a mensagem com 10 faixas.
-3. Rode `library list`, depois `library list --by rating`, `library list --by title` e `library list --by artist`. Cada forma deve listar as faixas na ordem indicada.
-4. Rode `playlist new teste`, `playlist add 3`, `playlist add 7` e `playlist add 1`. Use `playlist show` para conferir a ordem e o cursor na primeira faixa.
-5. Rode `play`, `next` e `prev`. A linha iniciada por `>>> Tocando:` deve indicar a faixa executada. Rode `prev` na primeira faixa e `next` até a última para conferir as mensagens de limite.
-6. Rode `enqueue 5`, `enqueue 8` e `queue show`. Rode `next` duas vezes: as duas faixas enfileiradas tocam primeiro. `playlist show` confirma que o cursor da playlist não avançou nesses dois comandos.
-7. Rode `history` e confira que a execução mais recente aparece primeiro.
-8. Rode `smart-shuffle 5` e `playlist show`. O resultado terá cinco faixas, com rating alto em primeiro lugar; faixas tocadas recentemente recebem a penalidade descrita acima. Teste também `smart-shuffle 11` para conferir a validação do limite.
-9. Rode `enqueue 5`, `play` e `next` para preencher estado variado. Salve com `save estado.json`. Anote a saída de `playlist show`, `queue show` e `history`.
-10. Rode `playlist new temporaria`, `playlist add 4` e então `load estado.json`. As saídas de `playlist show`, `queue show` e `history` devem voltar ao estado anotado. Encerre com `quit`.
-
-O descarte FIFO do histórico ao ultrapassar 20 itens e a igualdade de estado após salvar e restaurar também são verificados nos testes automatizados.
